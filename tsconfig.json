@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "target": "ES5",
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "lib": ["ES2015"],
+        "outDir": "./build"
+    },
+    "include": [
+        "./lib/*"
+    ]
+}

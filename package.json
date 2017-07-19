@@ -1,0 +1,27 @@
+{
+  "name": "serializer",
+  "version": "0.0.1",
+  "main": "index.js",
+  "author": "Gilang Pambudi",
+  "license": "MIT",
+  "dependencies": {
+    "moment": "^2.18.1",
+    "ramda": "^0.24.1"
+  },
+  "scripts": {
+    "test": "jest",
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "jest": "^20.0.4",
+    "@types/jest": "^20.0.4",
+    "typescript": "^2.4.1"
+  },
+  "jest": {
+    "moduleFileExtensions": ["ts", "tsx", "js"],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "<rootDir>/preprocessor.js"
+    },
+    "testMatch": ["**/__tests__/*.(ts|tsx|js)"]
+  }
+}
