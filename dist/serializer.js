@@ -48,7 +48,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var R = require("ramda");
 var errors_1 = require("./errors");
 var fields_1 = require("./fields");
-var AbstractSerializer = (function () {
+var AbstractSerializer = /** @class */ (function () {
     function AbstractSerializer(args) {
         if (args === void 0) { args = {}; }
         this.validatedData = null;
@@ -233,10 +233,11 @@ var AbstractSerializer = (function () {
 }());
 exports.AbstractSerializer = AbstractSerializer;
 // For Sequelize Model
-var ModelSerializer = (function (_super) {
+var ModelSerializer = /** @class */ (function (_super) {
     __extends(ModelSerializer, _super);
-    function ModelSerializer(args) {
+    function ModelSerializer(args, model) {
         var _this = _super.call(this, args) || this;
+        _this.model = model;
         _this._setupModelFields();
         return _this;
     }
@@ -339,3 +340,4 @@ function field(field) {
     };
 }
 exports.field = field;
+//# sourceMappingURL=serializer.js.map

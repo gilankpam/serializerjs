@@ -10,7 +10,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var ValidationError = (function (_super) {
+var ValidationError = /** @class */ (function (_super) {
     __extends(ValidationError, _super);
     function ValidationError(message, fields) {
         if (message === void 0) { message = 'Validation Error'; }
@@ -25,3 +25,4 @@ var ValidationError = (function (_super) {
     return ValidationError;
 }(Error));
 exports.ValidationError = ValidationError;
+//# sourceMappingURL=errors.js.map

@@ -5,7 +5,7 @@ import * as V from './validators'
 
 import { Serializer, SerializerArgs } from './serializer'
 
-interface SerializerClass {
+export interface SerializerClass {
     new (args: SerializerArgs): Serializer
 }
 
@@ -22,7 +22,7 @@ export interface Field <T> {
     defaultValue?: any
 }
 
-type FieldOptions = {
+export type FieldOptions = {
     blank?: boolean 
     nullable?: boolean
     readOnly?: boolean
@@ -88,7 +88,6 @@ export abstract class AbstractField<T> implements Field<T> {
 }
 
 export class StringField extends AbstractField<string> {
-    validators: V.Validator<string>[] = [V.trim()]
     constructor (options: FieldOptions = {}) {
         super(options)
         const { minLength, maxLength, validators = [] } = options
@@ -98,6 +97,7 @@ export class StringField extends AbstractField<string> {
         if (maxLength) {
             this.validators.push(V.maxLength<string>(maxLength))
         }
+        this.validators.push(V.trim())
     }
 
     toIntervalValue (value: any): string {
@@ -159,7 +159,7 @@ export class DateTimeField extends AbstractField<Date> {
     }
 }
 
-abstract class ArrayField<T> extends AbstractField<T[]> {
+export abstract class ArrayField<T> extends AbstractField<T[]> {
     toIntervalValue (value: any[]): T[] {
         if (!Array.isArray(value)) {
             throw new Error('Invalid array')

@@ -166,11 +166,11 @@ export abstract class AbstractSerializer implements Serializer {
 // For Sequelize Model
 export abstract class ModelSerializer extends AbstractSerializer {
 
-    abstract model: any
+    // private model: any
     abstract modelFields: string[] | string
     abstract modelFieldExcludes: string[]
 
-    constructor (args: SerializerArgs) {
+    constructor (args: SerializerArgs, private model) {
         super(args)
         this._setupModelFields()
     }

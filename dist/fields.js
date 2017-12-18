@@ -48,7 +48,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var R = require("ramda");
 var moment = require("moment");
 var V = require("./validators");
-var AbstractField = (function () {
+var AbstractField = /** @class */ (function () {
     function AbstractField(options) {
         if (options === void 0) { options = {}; }
         this.blank = false;
@@ -116,12 +116,11 @@ var AbstractField = (function () {
     return AbstractField;
 }());
 exports.AbstractField = AbstractField;
-var StringField = (function (_super) {
+var StringField = /** @class */ (function (_super) {
     __extends(StringField, _super);
     function StringField(options) {
         if (options === void 0) { options = {}; }
         var _this = _super.call(this, options) || this;
-        _this.validators = [V.trim()];
         var minLength = options.minLength, maxLength = options.maxLength, _a = options.validators, validators = _a === void 0 ? [] : _a;
         if (minLength) {
             _this.validators.push(V.minLength(minLength));
@@ -129,6 +128,7 @@ var StringField = (function (_super) {
         if (maxLength) {
             _this.validators.push(V.maxLength(maxLength));
         }
+        _this.validators.push(V.trim());
         return _this;
     }
     StringField.prototype.toIntervalValue = function (value) {
@@ -140,7 +140,7 @@ var StringField = (function (_super) {
     return StringField;
 }(AbstractField));
 exports.StringField = StringField;
-var NumericField = (function (_super) {
+var NumericField = /** @class */ (function (_super) {
     __extends(NumericField, _super);
     function NumericField(options) {
         if (options === void 0) { options = {}; }
@@ -164,7 +164,7 @@ var NumericField = (function (_super) {
     return NumericField;
 }(AbstractField));
 exports.NumericField = NumericField;
-var DateTimeField = (function (_super) {
+var DateTimeField = /** @class */ (function (_super) {
     __extends(DateTimeField, _super);
     function DateTimeField(options) {
         if (options === void 0) { options = {}; }
@@ -194,7 +194,7 @@ var DateTimeField = (function (_super) {
     return DateTimeField;
 }(AbstractField));
 exports.DateTimeField = DateTimeField;
-var ArrayField = (function (_super) {
+var ArrayField = /** @class */ (function (_super) {
     __extends(ArrayField, _super);
     function ArrayField() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -210,7 +210,8 @@ var ArrayField = (function (_super) {
     };
     return ArrayField;
 }(AbstractField));
-var NumericArrayField = (function (_super) {
+exports.ArrayField = ArrayField;
+var NumericArrayField = /** @class */ (function (_super) {
     __extends(NumericArrayField, _super);
     function NumericArrayField() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -224,7 +225,7 @@ var NumericArrayField = (function (_super) {
     return NumericArrayField;
 }(ArrayField));
 exports.NumericArrayField = NumericArrayField;
-var SerializerField = (function (_super) {
+var SerializerField = /** @class */ (function (_super) {
     __extends(SerializerField, _super);
     function SerializerField(options) {
         if (options === void 0) { options = {}; }
@@ -255,7 +256,7 @@ var SerializerField = (function (_super) {
     return SerializerField;
 }(AbstractField));
 exports.SerializerField = SerializerField;
-var ChoiceField = (function (_super) {
+var ChoiceField = /** @class */ (function (_super) {
     __extends(ChoiceField, _super);
     function ChoiceField(options) {
         if (options === void 0) { options = {}; }
@@ -276,7 +277,7 @@ var ChoiceField = (function (_super) {
     return ChoiceField;
 }(AbstractField));
 exports.ChoiceField = ChoiceField;
-var ModelReferenceField = (function (_super) {
+var ModelReferenceField = /** @class */ (function (_super) {
     __extends(ModelReferenceField, _super);
     function ModelReferenceField(options) {
         if (options === void 0) { options = {}; }
@@ -298,3 +299,4 @@ var ModelReferenceField = (function (_super) {
     return ModelReferenceField;
 }(AbstractField));
 exports.ModelReferenceField = ModelReferenceField;
+//# sourceMappingURL=fields.js.map

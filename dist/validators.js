@@ -38,82 +38,106 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var R = require("ramda");
 var moment = require("moment");
 function minLength(min, errMsg) {
-    return function (val) {
+    var fn = function (val) {
         if (R.length(val) < min) {
             throw new Error(errMsg ? errMsg : 'Min length ' + min);
         }
         return val;
     };
+    fn.description = "Min length of " + min;
+    return fn;
 }
 exports.minLength = minLength;
 function maxLength(max, errMsg) {
-    return function (val) {
+    var fn = function (val) {
         if (R.length(val) > max) {
             throw new Error(errMsg ? errMsg : 'Max length ' + max);
         }
         return val;
     };
+    fn.description = "Max length of " + max;
+    return fn;
 }
 exports.maxLength = maxLength;
 function string(errMsg) {
-    return function (val) {
+    var fn = function (val) {
         if (!R.is(String, val)) {
             throw new Error(errMsg ? errMsg : 'Value must be string');
         }
         return val;
     };
+    fn.description = 'Must be string';
+    return fn;
 }
 exports.string = string;
 function numeric(errMsg) {
-    return function (val) {
+    var fn = function (val) {
         if (!R.is(Number, val)) {
             throw new Error(errMsg ? errMsg : 'Value must be numeric');
         }
         return val;
     };
+    fn.description = "Must be number";
+    return fn;
 }
 exports.numeric = numeric;
 function minValue(min, errMsg) {
-    return function (val) {
+    var fn = function (val) {
         if (val < min) {
             throw new Error(errMsg ? errMsg : 'Min value ' + min);
         }
         return val;
     };
+    fn.description = "Min value of " + min;
+    return fn;
 }
 exports.minValue = minValue;
 function maxValue(max, errMsg) {
-    return function (val) {
+    var fn = function (val) {
         if (val > max) {
             throw new Error(errMsg ? errMsg : 'Max value ' + max);
         }
         return val;
     };
+    fn.description = "Max value of " + max;
+    return fn;
 }
 exports.maxValue = maxValue;
-exports.required = function (errMsg) { return function (val) {
-    if (R.isNil(val) || R.isEmpty(val)) {
-        throw new Error(errMsg ? errMsg : 'Value required');
-    }
-    return val;
-}; };
-exports.boolean = function (errMsg) { return function (val) {
-    if (!R.is(Boolean, val)) {
-        throw new Error(errMsg ? errMsg : 'Value must be boolean');
-    }
-    return val;
-}; };
+function required(errMsg) {
+    var fn = function (val) {
+        if (R.isNil(val) || R.isEmpty(val)) {
+            throw new Error(errMsg ? errMsg : 'Value required');
+        }
+        return val;
+    };
+    fn.description = "Required field";
+    return fn;
+}
+exports.required = required;
+function boolean(errMsg) {
+    var fn = function (val) {
+        if (!R.is(Boolean, val)) {
+            throw new Error(errMsg ? errMsg : 'Value must be boolean');
+        }
+        return val;
+    };
+    fn.description = "Must be boolean";
+    return fn;
+}
+exports.boolean = boolean;
 function trim(errMsg) {
-    return function (val) {
+    var fn = function (val) {
         if (!R.is(String, val)) {
             throw new Error('Value must be string');
         }
         return R.trim(val);
     };
+    fn.description = "Trip the value";
+    return fn;
 }
 exports.trim = trim;
 function date(format, errMsg) {
-    return function (val) {
+    var fn = function (val) {
         var date;
         if (format) {
             date = moment(val, format);
@@ -126,15 +150,22 @@ function date(format, errMsg) {
         }
         return date.toDate();
     };
+    fn.description = "Must be date.";
+    if (format) {
+        fn.description += "Format must be " + format;
+    }
+    return fn;
 }
 exports.date = date;
 function inside(list, errMsg) {
-    return function (val) {
+    var fn = function (val) {
         if (!R.contains(val, list)) {
             throw new Error(errMsg ? errMsg : 'Invalid value');
         }
         return val;
     };
+    fn.description = "Value must in " + list.map(function (l) { return l.toString(); }).join(', ');
+    return fn;
 }
 exports.inside = inside;
 function modelExist(model, field, errMsg) {
@@ -165,3 +196,32 @@ function modelExist(model, field, errMsg) {
     };
 }
 exports.modelExist = modelExist;
+function modelUniqueField(model, field, errMsg) {
+    return function (val) {
+        return __awaiter(this, void 0, void 0, function () {
+            var keyValue, instance, _a;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        if (!field) {
+                            field = model.primaryKeyField;
+                        }
+                        keyValue = isNaN(Number(val)) ? val : Number(val);
+                        return [4 /*yield*/, model.findOne({
+                                where: (_a = {},
+                                    _a[field] = keyValue,
+                                    _a)
+                            })];
+                    case 1:
+                        instance = _b.sent();
+                        if (!R.isNil(instance)) {
+                            throw new Error(errMsg ? errMsg : 'Object already exist');
+                        }
+                        return [2 /*return*/, keyValue];
+                }
+            });
+        });
+    };
+}
+exports.modelUniqueField = modelUniqueField;
+//# sourceMappingURL=validators.js.map
