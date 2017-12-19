@@ -132,7 +132,7 @@ function trim(errMsg) {
         }
         return R.trim(val);
     };
-    fn.description = "Trip the value";
+    fn.description = "Trim the value";
     return fn;
 }
 exports.trim = trim;
@@ -169,7 +169,7 @@ function inside(list, errMsg) {
 }
 exports.inside = inside;
 function modelExist(model, field, errMsg) {
-    return function (val) {
+    var fn = function (val) {
         return __awaiter(this, void 0, void 0, function () {
             var keyValue, instance, _a;
             return __generator(this, function (_b) {
@@ -194,10 +194,12 @@ function modelExist(model, field, errMsg) {
             });
         });
     };
+    fn.description = 'Value must be exist in database';
+    return fn;
 }
 exports.modelExist = modelExist;
 function modelUniqueField(model, field, errMsg) {
-    return function (val) {
+    var fn = function (val) {
         return __awaiter(this, void 0, void 0, function () {
             var keyValue, instance, _a;
             return __generator(this, function (_b) {
@@ -222,6 +224,8 @@ function modelUniqueField(model, field, errMsg) {
             });
         });
     };
+    fn.description = 'Value must be unique in database';
+    return fn;
 }
 exports.modelUniqueField = modelUniqueField;
 //# sourceMappingURL=validators.js.map

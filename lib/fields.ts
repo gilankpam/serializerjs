@@ -20,6 +20,7 @@ export interface Field <T> {
     writeOnly?: boolean
     source?: string
     defaultValue?: any
+    validators?: V.Validator<any>[]
 }
 
 export type FieldOptions = {

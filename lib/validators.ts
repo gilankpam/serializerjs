@@ -107,7 +107,7 @@ export function trim (errMsg?: string): Validator<string> {
 
         return R.trim(val)
     }
-    fn.description = `Trip the value`
+    fn.description = `Trim the value`
     return fn
 }
 
@@ -143,7 +143,7 @@ export function inside (list: any[], errMsg?: string): Validator<any> {
 }
 
 export function modelExist (model: any, field?: string, errMsg?: string): Validator<Promise<any>> {
-    return async function (val: string | number): Promise<any> {
+    const fn = <Validator<Promise<any>>>async function (val: any): Promise<any> {
         if (!field) {
             field = model.primaryKeyField
         }
@@ -158,10 +158,12 @@ export function modelExist (model: any, field?: string, errMsg?: string): Valida
         }
         return keyValue
     }
+    fn.description = 'Value must be exist in database'
+    return fn
 }
 
 export function modelUniqueField (model: any, field?: string, errMsg?: string): Validator<Promise<any>> {
-    return async function (val: string | number): Promise<any> {
+    const fn = <Validator<Promise<any>>>async function (val: any): Promise<any> {
         if (!field) {
             field = model.primaryKeyField
         }
@@ -176,4 +178,6 @@ export function modelUniqueField (model: any, field?: string, errMsg?: string): 
         }
         return keyValue
     }
+    fn.description = 'Value must be unique in database'
+    return fn
 }
