@@ -48,7 +48,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var R = require("ramda");
 var errors_1 = require("./errors");
 var fields_1 = require("./fields");
-var AbstractSerializer = /** @class */ (function () {
+var AbstractSerializer = (function () {
     function AbstractSerializer(args) {
         if (args === void 0) { args = {}; }
         this.validatedData = null;
@@ -202,7 +202,7 @@ var AbstractSerializer = /** @class */ (function () {
                         if (!!R.isNil(field_2.source)) return [3 /*break*/, 5];
                         fn = this[field_2.source];
                         if (!(typeof fn === 'function')) return [3 /*break*/, 3];
-                        return [4 /*yield*/, fn(instance, this.validatedData)];
+                        return [4 /*yield*/, fn.call(this, instance, this.validatedData)];
                     case 2:
                         value = _d.sent();
                         return [3 /*break*/, 4];
@@ -233,7 +233,7 @@ var AbstractSerializer = /** @class */ (function () {
 }());
 exports.AbstractSerializer = AbstractSerializer;
 // For Sequelize Model
-var ModelSerializer = /** @class */ (function (_super) {
+var ModelSerializer = (function (_super) {
     __extends(ModelSerializer, _super);
     function ModelSerializer(args, model) {
         var _this = _super.call(this, args) || this;

@@ -148,7 +148,7 @@ export abstract class AbstractSerializer implements Serializer {
             if (!R.isNil(field.source)) {
                 const fn = this[field.source]
                 if (typeof fn === 'function') {
-                    value = await fn(instance, this.validatedData)
+                    value = await fn.call(this, instance, this.validatedData)
                 } else {
                     value = instance[field.source]
                 }

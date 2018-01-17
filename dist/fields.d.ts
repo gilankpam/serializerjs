@@ -83,3 +83,9 @@ export declare class ModelReferenceField extends AbstractField<any> {
     toRepresentation(value: any): any;
     toIntervalValue(value: any): any;
 }
+export declare class BooleanField extends AbstractField<boolean> {
+    validators: V.Validator<boolean>[];
+    constructor(options?: FieldOptions);
+    toIntervalValue(value: any): boolean;
+    toRepresentation(value: boolean): any;
+}

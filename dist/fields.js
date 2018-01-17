@@ -48,7 +48,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var R = require("ramda");
 var moment = require("moment");
 var V = require("./validators");
-var AbstractField = /** @class */ (function () {
+var AbstractField = (function () {
     function AbstractField(options) {
         if (options === void 0) { options = {}; }
         this.blank = false;
@@ -116,7 +116,7 @@ var AbstractField = /** @class */ (function () {
     return AbstractField;
 }());
 exports.AbstractField = AbstractField;
-var StringField = /** @class */ (function (_super) {
+var StringField = (function (_super) {
     __extends(StringField, _super);
     function StringField(options) {
         if (options === void 0) { options = {}; }
@@ -140,7 +140,7 @@ var StringField = /** @class */ (function (_super) {
     return StringField;
 }(AbstractField));
 exports.StringField = StringField;
-var NumericField = /** @class */ (function (_super) {
+var NumericField = (function (_super) {
     __extends(NumericField, _super);
     function NumericField(options) {
         if (options === void 0) { options = {}; }
@@ -164,7 +164,7 @@ var NumericField = /** @class */ (function (_super) {
     return NumericField;
 }(AbstractField));
 exports.NumericField = NumericField;
-var DateTimeField = /** @class */ (function (_super) {
+var DateTimeField = (function (_super) {
     __extends(DateTimeField, _super);
     function DateTimeField(options) {
         if (options === void 0) { options = {}; }
@@ -194,7 +194,7 @@ var DateTimeField = /** @class */ (function (_super) {
     return DateTimeField;
 }(AbstractField));
 exports.DateTimeField = DateTimeField;
-var ArrayField = /** @class */ (function (_super) {
+var ArrayField = (function (_super) {
     __extends(ArrayField, _super);
     function ArrayField() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -211,7 +211,7 @@ var ArrayField = /** @class */ (function (_super) {
     return ArrayField;
 }(AbstractField));
 exports.ArrayField = ArrayField;
-var NumericArrayField = /** @class */ (function (_super) {
+var NumericArrayField = (function (_super) {
     __extends(NumericArrayField, _super);
     function NumericArrayField() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -225,7 +225,7 @@ var NumericArrayField = /** @class */ (function (_super) {
     return NumericArrayField;
 }(ArrayField));
 exports.NumericArrayField = NumericArrayField;
-var SerializerField = /** @class */ (function (_super) {
+var SerializerField = (function (_super) {
     __extends(SerializerField, _super);
     function SerializerField(options) {
         if (options === void 0) { options = {}; }
@@ -256,7 +256,7 @@ var SerializerField = /** @class */ (function (_super) {
     return SerializerField;
 }(AbstractField));
 exports.SerializerField = SerializerField;
-var ChoiceField = /** @class */ (function (_super) {
+var ChoiceField = (function (_super) {
     __extends(ChoiceField, _super);
     function ChoiceField(options) {
         if (options === void 0) { options = {}; }
@@ -277,7 +277,7 @@ var ChoiceField = /** @class */ (function (_super) {
     return ChoiceField;
 }(AbstractField));
 exports.ChoiceField = ChoiceField;
-var ModelReferenceField = /** @class */ (function (_super) {
+var ModelReferenceField = (function (_super) {
     __extends(ModelReferenceField, _super);
     function ModelReferenceField(options) {
         if (options === void 0) { options = {}; }
@@ -299,4 +299,21 @@ var ModelReferenceField = /** @class */ (function (_super) {
     return ModelReferenceField;
 }(AbstractField));
 exports.ModelReferenceField = ModelReferenceField;
+var BooleanField = (function (_super) {
+    __extends(BooleanField, _super);
+    function BooleanField(options) {
+        if (options === void 0) { options = {}; }
+        var _this = _super.call(this, options) || this;
+        _this.validators = [V.boolean()];
+        return _this;
+    }
+    BooleanField.prototype.toIntervalValue = function (value) {
+        return V.boolean()(value);
+    };
+    BooleanField.prototype.toRepresentation = function (value) {
+        return value;
+    };
+    return BooleanField;
+}(AbstractField));
+exports.BooleanField = BooleanField;
 //# sourceMappingURL=fields.js.map

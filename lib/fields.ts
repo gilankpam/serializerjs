@@ -248,3 +248,19 @@ export class ModelReferenceField extends AbstractField<any> {
         return value
     }
 }
+
+export class BooleanField extends AbstractField<boolean> {
+    validators = [V.boolean()]
+
+    constructor (options: FieldOptions = {}) {
+        super(options)
+    }
+
+    toIntervalValue (value: any): boolean {
+        return V.boolean()(value)
+    }
+
+    toRepresentation (value: boolean): any {
+        return value
+    } 
+}
