@@ -6,7 +6,7 @@
   "author": "Gilang Pambudi",
   "license": "MIT",
   "dependencies": {
-    "moment": "^2.18.1",
+    "moment": "^2.29.2",
     "ramda": "^0.24.1"
   },
   "scripts": {
