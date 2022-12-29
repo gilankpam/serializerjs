@@ -14,7 +14,7 @@
     "build": "tsc"
   },
   "devDependencies": {
-    "jest": "^20.0.4",
+    "jest": "^29.3.1",
     "@types/jest": "^20.0.4",
     "typescript": "^2.4.1"
   },
